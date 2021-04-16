@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/article', (req, res) => {
+router.get('/articles', (req, res) => {
     res.send('ROUTE ARTICLES')
 });
 
-router.get('/admin/article/create', (req, res) => {
-    res.send('ROUTE CREATE NEW ARTICLES')
+router.get('/admin/articles/create', (req, res) => {
+    res.send('ROUTE CREATE NEW ARTICLE')
 })
 
 module.exports = router;
