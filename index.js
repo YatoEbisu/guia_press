@@ -34,7 +34,7 @@ app.use('/', categoriesController);
 app.use('/', categoriesArticles);
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index');  
 })
 
 app.listen(8080, () => {

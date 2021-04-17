@@ -1,0 +1,63 @@
+<%- include ('../../partials/header.ejs')%>
+<body>
+<%- include ('../../partials/navbar.ejs')%>
+
+    <div class="container">
+        <hr>
+        <div class="d-flex">
+            <h2>Categorias</h2>
+            <a href="/admin/categories/new" class="btn btn-primary ml-auto d-flex align-items-center">Criar nova categoria</a>
+        </div>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach((category) => { %>
+                <tr>
+                    <th><%= category.id %></th>
+                    <td><%= category.title %></td>
+                    <td><%= category.slug %></td>
+                    <td>
+                        <a class="btn btn-warning">Editar</a>
+                        <button class="btn btn-danger" onclick="ConfirmDelete('<%= category.id %>', '<%= category.title %>')">Deletar</button>
+                    </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalDelete" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-white" >Deletar categoria!</h5>
+        </div>
+        <div class="modal-body">
+           <p id="categoryTitle"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <a id="deleteButton" class="btn btn-danger">Deletar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script>
+    function ConfirmDelete(id, title){
+        $('#modalDelete').modal();
+        $('#categoryTitle').html(`Você realmente deseja deletar a categoria "${title}"?`) ;
+        $('#deleteButton').attr('href', `/admin/categories/delete/${id}`);
+    }
+</script>
+</body>
+<%- include ('../../partials/footer.ejs')%>
